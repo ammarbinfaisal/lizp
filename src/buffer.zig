@@ -27,7 +27,7 @@ pub const Buf = struct {
             .data = try os.mmap(
                 null,
                 1024 * 4,
-                PROT.READ | PROT.WRITE | PROT.EXEC,
+                PROT.WRITE | PROT.READ,
                 MAP.PRIVATE | MAP.ANONYMOUS,
                 -1,
                 0,
