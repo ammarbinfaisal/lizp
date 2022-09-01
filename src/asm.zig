@@ -31,6 +31,6 @@ const REX_PREFIX = 0x48;
 
 pub fn move_reg_imm32(reg: u8, src: i64) [7]u8 {
     const src_bytes = mem.asBytes(&src);
-    const res =  [_]u8{ REX_PREFIX, 0xc7, 0x05 | (reg << 3), src_bytes[0], src_bytes[1], src_bytes[2], src_bytes[3] };
+    const res = [_]u8{ REX_PREFIX, 0xc7, 0xc0 + reg, src_bytes[0], src_bytes[1], src_bytes[2], src_bytes[3] };
     return res;
 }
