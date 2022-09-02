@@ -71,9 +71,14 @@ pub const Buf = struct {
         self.data[index] = value;
     }
 
-    fn deinit(self: *Buf) void {
-        std.os.munmap(self.data);
-        self.data = {};
+    pub fn deinit(self: *Buf) void {
+        var aligned = mem.alignInSlice(self.data, 4096);
+
+        if (aligned != null) {
+            const algnd = aligned.?;
+            std.os.munmap(algnd);
+        }
+
         self.len = 0;
         self.cap = 0;
     }

@@ -10,4 +10,7 @@ pub fn main() anyerror!void {
     try buf.write(assembler.EPILOGUE[0..]);
     try buf.make_exec();
     try buf.execute();
+    buf.deinit();
+    // accessing data would cause an error
+    // std.debug.print("{s}", .{buf.data});
 }
