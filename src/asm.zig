@@ -1,8 +1,6 @@
 const std = @import("std");
-const heap = std.heap;
 const mem = std.mem;
 const integer = @import("integer.zig");
-const ArrayList = std.ArrayList;
 
 pub const RAX: u8 = 0;
 pub const RBX: u8 = 1;
