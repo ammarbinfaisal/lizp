@@ -5,13 +5,13 @@ const buffer = @import("buffer.zig");
 const syntax = @import("syntax.zig");
 
 pub const RAX: u8 = 0;
-pub const RBX: u8 = 1;
-pub const RCX: u8 = 2;
-pub const RDX: u8 = 3;
-pub const RSI: u8 = 4;
-pub const RDI: u8 = 5;
-pub const RBP: u8 = 6;
-pub const RSP: u8 = 7;
+pub const RCX: u8 = 1;
+pub const RDX: u8 = 2;
+pub const RBX: u8 = 3;
+pub const RSP: u8 = 4;
+pub const RBP: u8 = 5;
+pub const RSI: u8 = 6;
+pub const RDI: u8 = 7;
 
 pub const RET = 0xc3;
 
