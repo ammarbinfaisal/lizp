@@ -1,6 +1,6 @@
 const std = @import("std");
 const mem = std.mem;
-const integer = @import("integer.zig");
+const objects = @import("objects.zig");
 
 pub const RAX: u8 = 0;
 pub const RBX: u8 = 1;
