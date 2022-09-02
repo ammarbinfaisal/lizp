@@ -1,13 +1,15 @@
 const std = @import("std");
 const buffer = @import("buffer.zig");
 const assembler = @import("asm.zig");
+const syntax = @import("syntax.zig");
 
 pub fn main() anyerror!void {
-    const mov_int_rax = assembler.move_reg_imm32(assembler.RAX, 0xc001);
     var buf = try buffer.Buf.init(1024);
-    try buf.write(assembler.PROLOGUE[0..]);
-    try buf.write(mov_int_rax[0..]);
-    try buf.write(assembler.EPILOGUE[0..]);
+    const compiler = assembler.Compiler.init(&buf);
+    const expr: syntax.Expr = .{
+        .eint = 0xc001,
+    };
+    try compiler.compile_fn(&expr);
     try buf.make_exec();
     try buf.execute();
     buf.deinit();
