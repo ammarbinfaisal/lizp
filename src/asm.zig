@@ -17,17 +17,17 @@ pub const RET = 0xc3;
 
 pub const NOP = 0x90;
 
+const REX_PREFIX = 0x48;
+
 pub const PROLOGUE = [_]u8{
     0x55, // push rbp
-    0x48, 0x89, 0xe5, // mov rbp, rsp
+    REX_PREFIX, 0x89, 0xe5, // mov rbp, rsp
 };
 
 pub const EPILOGUE = [_]u8{
     0x5d, // pop rbp
     RET,
 };
-
-const REX_PREFIX = 0x48;
 
 pub fn move_reg_imm32(reg: u8, src: i64) [7]u8 {
     const src_bytes = mem.asBytes(&src);
