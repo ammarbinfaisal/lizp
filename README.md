@@ -5,7 +5,8 @@ a lisp compiler in zig
 ## Features
 
 -   can compile epilogue and prologue of a function only
--   move_reg_imm32 results in segfault :P
+-   can move an integer into a register
+-   that's it for now :P
 
 ## TODO
 
