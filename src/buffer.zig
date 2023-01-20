@@ -42,6 +42,13 @@ pub const Buf = struct {
         std.mem.copy(u8, self.data[self.len..], bytes);
         self.len += bytes.len;
     }
+
+    pub fn writeByte(self: *Buf, byte: u8) BufError!void {
+        if (self.state != BufState.WRITABLE) return BufError.NotWritable;
+        if (self.len + 1 > self.cap) return BufError.OutOfMemory;
+        self.data[self.len] = byte;
+        self.len += 1;
+    }
     
     pub fn make_exec(self: *Buf) BufError!void {
         if (self.state != BufState.WRITABLE) return BufError.NotWritable;
@@ -49,7 +56,7 @@ pub const Buf = struct {
 
         if (aligned != null) {
             const algnd = aligned.?;
-            try mprotect(algnd, PROT.READ | PROT.EXEC) catch BufError.ExecFailed;
+            std.os.mprotect(algnd, PROT.READ | PROT.EXEC) catch return error.ExecFailed;
         }
 
         self.state = BufState.EXECUTABLE;
@@ -57,7 +64,7 @@ pub const Buf = struct {
 
     pub fn execute(self: *Buf) BufError!void {
         if (self.state != BufState.EXECUTABLE) return BufError.NotExecutable;
-        const func = @ptrCast(fn () void, self.data[0..self.len]);
+        const func = @ptrCast(*fn () void, self.data[0..self.len]);
         func();
     }
 

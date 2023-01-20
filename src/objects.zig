@@ -15,23 +15,23 @@ const BitsPerByte = 8;
 const WordSize = 8;
 const BitsPerWord = WordSize * BitsPerByte;
 
-const IntegerTag: u8 = 0x00;
-const IntegerTagMask: u8 = 0x03;
-const IntegerShift: u8 = 2;
+pub const IntegerTag: u8 = 0x00;
+pub const IntegerTagMask: u8 = 0x03;
+pub const IntegerShift: u8 = 2;
 const IntegerBits = BitsPerWord - IntegerShift;
 
 const IntegerMax: i64 = (1 << (IntegerBits - 1)) - 1;
 const IntegerMin: i64 = -(1 << (IntegerBits - 1));
 
-const ImmediateTagMask: u8 = 0x3f;
+pub const ImmediateTagMask: u8 = 0x3f;
 
-const CharTag: u8 = 0xf;
-const CharMask: u8 = 0xff;
-const CharShift = 8;
+pub const CharTag: u8 = 0xf;
+pub const CharMask: u8 = 0xff;
+pub const CharShift = 8;
 
-const BoolTag: u8 = 0x1f;
-const BoolMask: u8 = 0x80;
-const BoolShift = 7;
+pub const BoolTag: u8 = 0x1f;
+pub const BoolMask: u8 = 0x80;
+pub const BoolShift = 7;
 
 pub const NIL = 0x2f;
 
